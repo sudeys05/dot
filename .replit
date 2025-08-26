@@ -1,0 +1,25 @@
+modules = ["nodejs-20", "web"]
+run = "npm run dev"
+
+[nix]
+channel = "stable-25_05"
+
+[deployment]
+run = ["sh", "-c", "npm start"]
+build = ["sh", "-c", "npm run build"]
+
+[workflows]
+runButton = "Start Police Management System"
+
+[[workflows.workflow]]
+name = "Start Police Management System"
+author = 46563257
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev:alt"
+
+[[ports]]
+localPort = 5000
+externalPort = 80

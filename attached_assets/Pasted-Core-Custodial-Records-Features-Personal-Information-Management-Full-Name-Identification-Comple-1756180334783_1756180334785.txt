@@ -1,0 +1,57 @@
+Core Custodial Records Features
+Personal Information Management
+Full Name & Identification: Complete inmate identity tracking with full names and unique prisoner numbers (auto-generated format: INM-YYYY-###XX)
+Demographics: Date of birth, age calculation, gender, nationality, marital status, education level, and religious affiliation
+Address Information: Current and permanent address records for inmates
+ID Photo Management: Upload and store inmate photographs with file metadata tracking
+Admission & Legal Status
+Admission Processing: Track admission dates and process new intakes
+Charges Management: Multiple charge types including Theft, Assault, Robbery, Burglary, Drug Possession, Fraud, Vandalism, Public Disorder, Traffic Violations, Domestic Violence, and Weapons Charges
+Sentence Tracking: Record sentence duration and court references
+Legal Documentation: Store court reference numbers and case linkages
+Bail Status: Track whether bail has been posted (true/false)
+Emergency Contact System
+Primary Contact: Emergency contact name, relationship type, phone number, and address
+Relationship Categories: Father, Mother, Spouse, Sibling, Child, Guardian, Friend, Lawyer, and Other
+Communication Records: Maintain contact information for family notifications
+Medical & Health Management
+Medical Conditions: Track existing health conditions (e.g., Hypertension, Diabetes, Asthma, Anxiety disorders)
+Allergies: Record known allergies (medications, foods, environmental)
+Doctor Notes: Medical professional observations and treatment plans
+Mental Health: Special tracking for suicide risk assessment (true/false flags)
+Behavioral & Disciplinary System
+Behavior Reports: Detailed behavioral observations and progress notes
+Disciplinary Actions: Record violations, sanctions, and corrective measures
+Privileges Management: Track earned privileges like library access, recreation time, education programs, work details
+Incident Tracking: Document altercations, rule violations, and interventions
+Security Classification
+Risk Assessment: Three-tier risk levels (Low, Medium, High)
+Security Classification: Minimum, Medium, and Maximum Security designations
+Suicide Risk Monitoring: Special flagging system for at-risk inmates
+Status Tracking: Active, Released, Transferred, Court Appearance statuses
+Administrative Features
+Search & Filter: Advanced search by name, prisoner number, status, or other criteria
+Status Filtering: Filter by Active, Released, Transferred, or Court Appearance
+Statistics Dashboard: Real-time counts of total inmates, active cases, releases, and court appearances
+Date Tracking: Comprehensive timestamps for creation, updates, admission, and release dates
+Data Management
+CRUD Operations: Complete Create, Read, Update, Delete functionality
+Record Seeding: Bulk data import with 15+ sample comprehensive records
+Database Integration: MongoDB backend with proper schema validation
+File Upload: Secure image upload system for ID photos
+Audit Trail: Track record creation and modification dates
+User Interface Features
+Responsive Design: Mobile-friendly interface with collapsible sections
+Form Validation: Comprehensive form validation for data integrity
+Interactive Sidebar: Detailed view/edit panels with organized sections
+Visual Indicators: Color-coded status indicators and risk level displays
+Bulk Actions: Mass operations for administrative efficiency
+Sample Data Includes
+The system comes pre-populated with realistic test data featuring diverse inmates with various:
+
+Charge combinations and severity levels
+Medical conditions and treatment needs
+Security classifications and risk assessments
+Family contact information
+Behavioral patterns and disciplinary histories
+This custodial records system provides a comprehensive solution for managing inmate information, ensuring proper documentation, tracking legal status, monitoring health and behavior, and maintaining security protocols within correctional facilities.

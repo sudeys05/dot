@@ -1,0 +1,257 @@
+.collapsible-sidebar {
+  background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+  min-height: 100vh;
+  transition: all 0.3s ease;
+  position: relative;
+  border-right: 1px solid #3a526b;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.collapsible-sidebar.expanded {
+  width: 280px;
+}
+
+.collapsible-sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 15px 15px 15px;
+  border-bottom: 1px solid #3a526b;
+  margin-bottom: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ecf0f1;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.logo-icon {
+  color: #3498db;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.toggle-btn {
+  background: rgba(52, 152, 219, 0.2);
+  border: 1px solid #3498db;
+  border-radius: 6px;
+  color: #3498db;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.toggle-btn.full-width {
+  width: calc(100% - 30px);
+  margin: 0 15px 15px 15px;
+  border-bottom: 1px solid #3a526b;
+  padding-bottom: 15px;
+}
+
+.toggle-btn:hover {
+  background: rgba(52, 152, 219, 0.3);
+  transform: translateY(-1px);
+}
+
+.sidebar-user {
+  padding: 15px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin: 0 15px 20px 15px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-user.collapsed {
+  padding: 10px 0;
+  margin: 0 auto 20px auto;
+  background: transparent;
+  width: fit-content;
+}
+
+.sidebar-user:not(.collapsed) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  color: #ecf0f1;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  color: #3498db;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.user-badge {
+  color: #bdc3c7;
+  font-size: 11px;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 15px;
+  background: transparent;
+  border: none;
+  color: #bdc3c7;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.nav-item.collapsed {
+  justify-content: center;
+  padding: 14px;
+}
+
+.nav-item:hover {
+  background: rgba(52, 152, 219, 0.15);
+  color: #ecf0f1;
+  transform: translateX(4px);
+}
+
+.nav-item.active {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.nav-item.active:hover {
+  transform: translateX(0);
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar-footer {
+  padding: 15px 10px;
+  border-top: 1px solid #3a526b;
+  margin-top: auto;
+}
+
+.logout-item {
+  color: #e74c3c !important;
+  border: 1px solid transparent;
+}
+
+.logout-item:hover {
+  background: rgba(231, 76, 60, 0.15) !important;
+  border-color: rgba(231, 76, 60, 0.3);
+  color: #ecf0f1 !important;
+}
+
+/* Three dots animation for collapsed state */
+.collapsible-sidebar.collapsed::before {
+  content: '⋮';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #3498db;
+  font-size: 24px;
+  font-weight: bold;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .collapsible-sidebar.expanded {
+    width: 250px;
+  }
+  
+  .collapsible-sidebar.collapsed {
+    width: 60px;
+  }
+  
+  .sidebar-header {
+    padding: 15px 10px;
+  }
+  
+  .logo {
+    font-size: 16px;
+  }
+  
+  .nav-item {
+    padding: 12px;
+    font-size: 13px;
+  }
+  
+  .nav-item.collapsed {
+    padding: 12px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .collapsible-sidebar.expanded {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background: rgba(44, 62, 80, 0.98);
+    backdrop-filter: blur(10px);
+  }
+}
