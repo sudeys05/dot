@@ -3,7 +3,7 @@ services:
   - type: web
     name: police-management-system
     env: node
-    buildCommand: npm install && npm run build
+    buildCommand: npm install && npm run build && mkdir -p dist/server && cp -r server/*.js dist/server/
     startCommand: npm start
     envVars:
       - key: NODE_ENV
