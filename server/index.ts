@@ -190,7 +190,7 @@ async function startServer() {
     }
 
     const port = parseInt(process.env.PORT || '5000', 10);
-    server.listen(port, '0.0.0.0', () => {
+    server.listen(port, () => {
       log(`Police Management System running on port ${port}`);
       log(`Environment: ${process.env.NODE_ENV || 'development'}`);
       log(`MongoDB Status: ${mongoConnected ? 'Connected' : 'Disconnected (Fallback Mode)'}`);
