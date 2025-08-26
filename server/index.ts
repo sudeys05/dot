@@ -169,7 +169,7 @@ async function startServer() {
         }
       });
     } else {
-      await setupVite(app, server);
+      await setupVite(app);
     }
 
     // Seed development data (only if MongoDB is connected)
