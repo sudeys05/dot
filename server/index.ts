@@ -1,7 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import cors from 'cors';
-import { connectToMongoDB } from './mongodb-connection.js';
+import { connectToMongoDB } from './mongodb-connection.js'; // Ensure this is correct after transpilation
 import { registerMongoDBRoutes } from './mongodb-routes.js';
 import { registerEvidenceRoutes } from './evidence-routes.js';
 import { registerCustodialRoutes } from './custodial-routes.js';
@@ -13,12 +13,14 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import multer from 'multer';
 
+// Resolve path for __dirname (in ESM modules)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
-function maskMongoUri(uri) {
+// Helper function to mask MongoDB URI in logs
+function maskMongoUri(uri: string | undefined): string {
   if (!uri) return "[NOT SET]";
   return uri.replace(/:\/\/([^:]+):([^@]+)@/, "://$1:***@");
 }
@@ -84,13 +86,24 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false,
+    secure: false, // Set to true in production with HTTPS
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
 
 // Serve uploaded files statically
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  const mongoStatus = process.env.MONGODB_URI ? 'connected' : 'disconnected';
+  res.json({
+    status: 'OK',
+    timestamp: new Date().toISOString(),
+    mongodb: mongoStatus,
+    message: mongoStatus === 'connected' ? 'All systems operational' : 'Running in fallback mode - update MongoDB URI in .env'
+  });
+});
 
 async function startServer() {
   let mongoConnected = false;
@@ -111,16 +124,18 @@ async function startServer() {
     // Register routes (even without MongoDB for basic functionality)
     if (mongoConnected) {
       registerMongoDBRoutes(app, upload, uploadCustodial);
-      // Register Evidence Routes
-      console.log('🔧 Registering Evidence Routes...');
-      registerEvidenceRoutes(app, upload);
-      console.log('✅ Evidence Routes registered successfully');
-
-      // Register Custodial Routes
-      console.log('🔧 Registering Custodial Routes...');
-      registerCustodialRoutes(app);
-      console.log('✅ Custodial Routes registered successfully');
+      console.log('✅ MongoDB Routes registered successfully');
     }
+
+    // Register Evidence Routes
+    console.log('🔧 Registering Evidence Routes...');
+    registerEvidenceRoutes(app, upload);
+    console.log('✅ Evidence Routes registered successfully');
+
+    // Register Custodial Routes
+    console.log('🔧 Registering Custodial Routes...');
+    registerCustodialRoutes(app);
+    console.log('✅ Custodial Routes registered successfully');
 
     // Import and register additional routes (optional)
     try {
@@ -136,30 +151,9 @@ async function startServer() {
     // Serve uploaded files statically
     app.use('/uploads', express.static('uploads'));
 
-    // Health check endpoint
-    app.get('/api/health', (req, res) => {
-      res.json({
-        status: 'OK',
-        timestamp: new Date().toISOString(),
-        mongodb: mongoConnected ? 'connected' : 'disconnected',
-        message: mongoConnected ? 'All systems operational' : 'Running in fallback mode - update MongoDB URI in .env'
-      });
-    });
-
-    // Basic fallback route when MongoDB is not connected
-    if (!mongoConnected) {
-      app.get('/api/*', (req, res) => {
-        res.status(503).json({
-          message: 'Database not available. Please configure MongoDB URI in .env file.',
-          status: 'service_unavailable'
-        });
-      });
-    }
-
+    // Static files for React build (production)
     if (process.env.NODE_ENV === 'production') {
-      // Serve static files from React build
       const buildPath = path.join(__dirname, '../dist/public');
-
       app.use(express.static(buildPath));
 
       // Handle React Router - send all non-API requests to index.html
@@ -197,7 +191,6 @@ async function startServer() {
       log(`Server accessible at: http://0.0.0.0:${port}`);
       console.log(`🌐 Server is ready and listening on http://0.0.0.0:${port}`);
       console.log(`📱 Replit webview should be accessible now`);
-      console.log(`🚀 Click the webview button or open the URL above to access your Police Management System`);
 
       if (!mongoConnected) {
         console.log(`⚠️  Note: Running without database. Update MONGODB_URI in .env to enable full functionality`);
@@ -206,7 +199,6 @@ async function startServer() {
 
   } catch (error) {
     console.error('❌ Failed to start server:', error.message);
-    console.error('Stack trace:', error.stack);
     process.exit(1);
   }
 }
