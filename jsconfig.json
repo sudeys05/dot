@@ -12,10 +12,10 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,  // Set to false to emit compiled files
     "jsx": "react-jsx",
     "declaration": false,
-    "outDir": "./dist",
+    "outDir": "./dist",  // Output compiled code to 'dist' directory
     "baseUrl": ".",
     "paths": {
       "@/*": ["./client/src/*"],
@@ -28,7 +28,7 @@
   "include": [
     "client/src/**/*",
     "shared/**/*",
-    "server/**/*"
+    "server/**/*"  // Make sure server files are included for compilation
   ],
   "exclude": [
     "node_modules",
