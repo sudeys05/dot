@@ -1,3 +1,4 @@
+
 {
   "compilerOptions": {
     "target": "ES2020",
@@ -12,27 +13,26 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,  // Set to false to emit compiled files
+    "noEmit": false,
     "jsx": "react-jsx",
     "declaration": false,
-    "outDir": "./dist",  // Output compiled code to 'dist' directory
+    "outDir": "../dist/server",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./client/src/*"],
-      "@/components/*": ["./client/src/components/*"],
-      "@/lib/*": ["./client/src/lib/*"],
-      "@/hooks/*": ["./client/src/hooks/*"],
-      "@shared/*": ["./shared/*"]
+      "@/*": ["../client/src/*"],
+      "@/components/*": ["../client/src/components/*"],
+      "@/lib/*": ["../client/src/lib/*"],
+      "@/hooks/*": ["../client/src/hooks/*"],
+      "@shared/*": ["../shared/*"]
     }
   },
   "include": [
-    "client/src/**/*",
-    "shared/**/*",
-    "server/**/*"  // Make sure server files are included for compilation
+    "./**/*",
+    "../shared/**/*"
   ],
   "exclude": [
     "node_modules",
-    "dist",
-    "build"
+    "../dist",
+    "../build"
   ]
 }
